@@ -1,0 +1,20 @@
+
+.table {
+  margin: 50px;
+}
+
+th {
+  text-transform: uppercase;
+  background-color: #1384ed;
+}
+
+th, td {
+  border: 1px solid #000; 
+  padding: 12px; 
+  text-align:  center;   
+}
+
+td {
+  background-color:#d7eaf5cc
+}
+
