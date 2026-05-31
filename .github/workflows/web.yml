@@ -2,9 +2,15 @@ name: CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
+
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   build:
@@ -22,8 +28,37 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run build 
-        run: npm run build 
+      - name: Run build
+        run: npm run build
 
-      - name: Run tests 
+      - name: Debug dist
+        run: |
+          ls -la
+          ls -la dist
+          find dist -type f
+
+      - name: Run tests
         run: npm test --if-present
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    needs: build
+
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
