@@ -8,6 +8,7 @@
    
     dataList.forEach(element => {
         let elementTable = document.createElement('tr');
+        
    
         for (let key in element) {
             let cellName = document.createElement('td')
@@ -17,10 +18,10 @@
                 cellName.textContent = (element[key])
             }
    
-            elementTable.appendChild(cellName)
+            elementTable.append(cellName)
         }
    
-        fragment.appendChild(elementTable);
+        fragment.append(elementTable);
    
     });
    
@@ -63,11 +64,10 @@
    
     let i = 0;
    
-    setInterval(() => {
+    let intervalID = setInterval(() => {
         sortBox[i]();
    
-        i = (i + 1) % sortBox.length;
-   
+        i = (i + 1) % sortBox.length;  
    
     }, 2000)
    
@@ -101,10 +101,10 @@
                 cellName.textContent = (element[key])
                 }
 
-                elementTable.appendChild(cellName)
+                elementTable.append(cellName)
             }   
             
-             table.appendChild(elementTable);
+             table.append(elementTable);
               
         });       
 
@@ -128,10 +128,10 @@
         });
 
                 
-        sortData.forEach(item => fragment.appendChild(item));
+        sortData.forEach(item => fragment.append(item));
         
 
-        table.appendChild(fragment);
+        table.append(fragment);
 
     }    
 
